@@ -1,0 +1,69 @@
+[System]
+Name='Fuzzy_controller'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=20
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='e_{pos}'
+Range=[-0.4 0.4]
+NumMFs=6
+MF1='land_{W}':'trimf',[-0.02 0 0.001]
+MF2='approach_{E}':'trapmf',[0.007099 0.07741 0.4 0.4233]
+MF3='lineup_{E}':'trimf',[0 0.0372 0.1]
+MF4='approach_{W}':'trapmf',[-0.4233 -0.4 -0.07741 -0.007099]
+MF5='lineup_{W}':'trimf',[-0.1 -0.0372 0]
+MF6='land_{E}':'trimf',[-0.001 0 0.02]
+
+[Input2]
+Name='v'
+Range=[-0.5 0.5]
+NumMFs=7
+MF1='idle':'trimf',[-0.015 -0.00317 0.015]
+MF2='cruise_{forward}':'trimf',[0 0.05 0.0973]
+MF3='overspeed_{forward}':'trapmf',[0.1 0.2 0.5 0.552]
+MF4='fast_{forward}':'trimf',[0.0148 0.107822410147992 0.498]
+MF5='cruise_{back}':'trimf',[-0.0973 -0.05 0]
+MF6='fast_{back}':'trimf',[-0.498 -0.1078 -0.0148]
+MF7='overspeed_{back}':'trapmf',[-0.552 -0.5 -0.2 -0.1]
+
+[Output1]
+Name='angle_{wheel}'
+Range=[-0.523598775598299 0.523598775598299]
+NumMFs=7
+MF1='bankleft_{midium}':'trimf',[0.0872664625997165 0.174532925199433 0.261799387799149]
+MF2='steady':'trimf',[-0.01745 0 0.01745]
+MF3='bankleft_{minor}':'trimf',[0 0.02878 0.174532925199433]
+MF4='bankleft_{sharp}':'trapmf',[0.174532925199433 0.349065850398866 1.90985931710274 1.90985931710274]
+MF5='bankright_{minor}':'trimf',[-0.1745 -0.02878 0]
+MF6='bankright_{midium}':'trimf',[-0.2618 -0.1745 -0.08727]
+MF7='bankright_{sharp}':'trapmf',[-1.91 -1.91 -0.3491 -0.1745]
+
+[Rules]
+0 7, 4 (0.5) : 1
+0 3, 7 (0.5) : 1
+1 1, 2 (1) : 1
+6 1, 2 (1) : 1
+1 2, 5 (1) : 1
+6 5, 3 (1) : 1
+1 5, 2 (1) : 1
+6 2, 2 (1) : 1
+2 4, 2 (1) : 1
+4 6, 2 (1) : 1
+2 2, 3 (1) : 1
+4 5, 5 (1) : 1
+2 1, 1 (1) : 1
+4 1, 6 (1) : 1
+2 5, 1 (1) : 1
+4 2, 6 (1) : 1
+2 6, 4 (1) : 1
+4 4, 7 (1) : 1
+3 1, 3 (1) : 1
+5 1, 5 (1) : 1
